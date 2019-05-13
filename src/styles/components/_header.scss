@@ -1,0 +1,38 @@
+.header-wrapper {
+  padding-top: 20px;
+  padding-bottom: 40px;
+
+  display: flex;
+  justify-content: space-between;
+
+  ul {
+    display: flex;
+  }
+
+  li {
+    margin-right: 20px;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  a.active {
+    color: $black;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .account-nav {
+    display: flex;
+    align-items: center;
+
+    p {
+      margin-right: 20px;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+//BASE
+@import 'base/variables';
+@import 'base/theme-colors';
+@import 'base/typography';
+@import 'base/btn';
+
+
+//GLOBAL
+@import "global-styles";
+@import "hamburgers/hamburgers";
+
+//COMPONENTS
+@import "components/nprogress";
+@import "components/scrollbar";
+@import "components/header";
+@import "components/todo-form";
+@import "components/csv-upload";
+
+//VIEWS
+@import 'views/home';
+@import 'views/admin-dashboard';
+@import 'views/profile';

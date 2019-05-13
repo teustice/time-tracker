@@ -1,0 +1,13 @@
+.spreadsheet-preview-area {
+}
+.error-message {
+  border-top: 2px solid $warning;
+  background-color: $warning-l;
+  padding: 5px;
+}
+.success-message {
+  background-color: $success-l;
+  border-top: 2px solid $success;
+  display: inline-block;
+  padding: 5px;
+}

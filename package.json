@@ -1,0 +1,65 @@
+{
+  "name": "time-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "css-loader": "2.1.1",
+    "dotenv": "7.0.0",
+    "dotenv-expand": "5.1.0",
+    "fs-extra": "7.0.1",
+    "object-assign": "4.1.1",
+    "postcss-flexbugs-fixes": "4.1.0",
+    "postcss-loader": "3.0.0",
+    "promise": "8.0.3",
+    "raf": "3.4.1",
+    "react": "^16.8.5",
+    "react-csv-reader": "^1.2.2",
+    "react-data-grid": "^6.1.0-0",
+    "react-data-grid-addons": "^6.1.0-0",
+    "react-dom": "^16.8.5",
+    "react-google-maps": "^9.4.5",
+    "react-helmet": "^5.2.0",
+    "react-loader-spinner": "^2.3.0",
+    "react-modal": "^3.8.1",
+    "react-notification-system": "^0.2.17",
+    "react-places-autocomplete": "^7.2.1",
+    "react-redux": "^6.0.1",
+    "react-router-dom": "^5.0.0",
+    "react-router-page-transition": "^3.1.0",
+    "react-router-redux": "^4.0.8",
+    "react-scripts": "^2.1.8",
+    "react-tabs": "^3.0.0",
+    "react-transition-group": "^2.7.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "resolve": "1.10.0",
+    "whatwg-fetch": "3.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts --max_old_space_size=4096 build",
+    "test": "jest",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-react": "^7.0.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
+    "enzyme-to-json": "^3.3.5",
+    "node-sass": "^4.11.0",
+    "react-test-renderer": "^16.8.6",
+    "redux-mock-store": "^1.5.3",
+    "sass-loader": "^7.1.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
