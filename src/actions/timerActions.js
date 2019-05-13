@@ -1,21 +1,21 @@
 import apiUrl from '../lib/apiUrl';
 
-export function getTodos(callback) {
+export function getTimers(callback) {
   return function(dispatch) {
     dispatch({
-      type: 'GET_TODOS_REQUEST'
+      type: 'GET_TIMERS_REQUEST'
     });
-    return fetch(`${apiUrl}/todos`)
+    return fetch(`${apiUrl}/timers`)
       .then(response => response.json().then(body => ({ response, body })))
       .then(({ response, body }) => {
         if (!response.ok) {
           dispatch({
-            type: 'GET_TODOS_FAILURE',
+            type: 'GET_TIMERS_FAILURE',
             error: body.error
           });
         } else {
           dispatch({
-            type: 'GET_TODOS_SUCCESS',
+            type: 'GET_TIMERS_SUCCESS',
             data: body
           });
 
@@ -26,12 +26,12 @@ export function getTodos(callback) {
   }
 }
 
-export function createTodo(body, callback) {
+export function createTimer(body, callback) {
   return function(dispatch) {
     dispatch({
-      type: 'CREATE_TODOS_REQUEST'
+      type: 'CREATE_TIMERS_REQUEST'
     });
-    return fetch(`${apiUrl}/todos`, {
+    return fetch(`${apiUrl}/timers`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -43,27 +43,27 @@ export function createTodo(body, callback) {
       .then(({ response, body }) => {
         if (!response.ok) {
           dispatch({
-            type: 'CREATE_TODOS_FAILURE',
+            type: 'CREATE_TIMERS_FAILURE',
             error: body.error
           });
         } else {
           dispatch({
-            type: 'CREATE_TODOS_SUCCESS',
+            type: 'CREATE_TIMERS_SUCCESS',
             data: body
           });
           callback && callback();
-          dispatch(getTodos());
+          dispatch(getTimers());
         }
       });
   }
 }
 
-export function createTodoBatch(body, callback) {
+export function createTimerBatch(body, callback) {
   return function(dispatch) {
     dispatch({
-      type: 'CREATE_TODOS_BATCH_REQUEST'
+      type: 'CREATE_TIMERS_BATCH_REQUEST'
     });
-    return fetch(`${apiUrl}/todos/batch`, {
+    return fetch(`${apiUrl}/timers/batch`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -75,28 +75,28 @@ export function createTodoBatch(body, callback) {
       .then(({ response, body }) => {
         if (!response.ok) {
           dispatch({
-            type: 'CREATE_TODOS_BATCH_FAILURE',
+            type: 'CREATE_TIMERS_BATCH_FAILURE',
             error: body.error
           });
           callback && callback('Error');
         } else {
           dispatch({
-            type: 'CREATE_TODOS_BATCH_SUCCESS',
+            type: 'CREATE_TIMERS_BATCH_SUCCESS',
             data: body
           });
-          dispatch(getTodos());
+          dispatch(getTimers());
           callback && callback();
         }
       });
   }
 }
 
-export function updateTodo(body, id, callback) {
+export function updateTimer(body, id, callback) {
   return function(dispatch) {
     dispatch({
-      type: 'UPDATE_TODOS_REQUEST'
+      type: 'UPDATE_TIMERS_REQUEST'
     });
-    return fetch(`${apiUrl}/todos/${id}`, {
+    return fetch(`${apiUrl}/timers/${id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -108,27 +108,27 @@ export function updateTodo(body, id, callback) {
       .then(({ response, body }) => {
         if (!response.ok) {
           dispatch({
-            type: 'UPDATE_TODOS_FAILURE',
+            type: 'UPDATE_TIMERS_FAILURE',
             error: body.error
           });
         } else {
           dispatch({
-            type: 'UPDATE_TODOS_SUCCESS',
+            type: 'UPDATE_TIMERS_SUCCESS',
             data: body
           });
           callback && callback();
-          dispatch(getTodos());
+          dispatch(getTimers());
         }
       });
   }
 }
 
-export function deleteTodo(id, callback) {
+export function deleteTimer(id, callback) {
   return function(dispatch) {
     dispatch({
-      type: 'DELETE_TODOS_REQUEST'
+      type: 'DELETE_TIMERS_REQUEST'
     });
-    return fetch(`${apiUrl}/todos/${id}`, {
+    return fetch(`${apiUrl}/timers/${id}`, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
@@ -139,48 +139,16 @@ export function deleteTodo(id, callback) {
       .then(({ response, body }) => {
         if (!response.ok) {
           dispatch({
-            type: 'DELETE_TODOS_FAILURE',
+            type: 'DELETE_TIMERS_FAILURE',
             error: body.error
           });
         } else {
           dispatch({
-            type: 'DELETE_TODOS_SUCCESS',
+            type: 'DELETE_TIMERS_SUCCESS',
             data: body
           });
           callback && callback();
-          dispatch(getTodos());
-        }
-      });
-  }
-}
-
-export function deleteTodoBatch(idArray, callback) {
-  return function(dispatch) {
-    dispatch({
-      type: 'DELETE_TODOS_BATCH_REQUEST'
-    });
-    return fetch(`${apiUrl}/todos/batch-delete`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(idArray)
-    })
-      .then(response => response.json().then(body => ({ response, body })))
-      .then(({ response, body }) => {
-        if (!response.ok) {
-          dispatch({
-            type: 'DELETE_TODOS_BATCH_FAILURE',
-            error: body.error
-          });
-        } else {
-          dispatch({
-            type: 'DELETE_TODOS_BATCH_SUCCESS',
-            data: body
-          });
-          callback && callback()
-          dispatch(getTodos());
+          dispatch(getTimers());
         }
       });
   }

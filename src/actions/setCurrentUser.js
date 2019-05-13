@@ -1,6 +1,6 @@
-export const setCurrentUser = (user) => dispatch => {
+export const setCurrentUser = (token) => dispatch => {
   dispatch({
     type: 'SET_CURRENT_USER',
-    payload: user
+    payload: token
   })
 }
