@@ -1,7 +1,9 @@
+
 function renderElapsedString(elapsed, runningSince) {
   let totalElapsed = elapsed;
-  if (runningSince) {
-    totalElapsed += Date.now() - runningSince;
+  let started = new Date(runningSince).getTime(); //convert date to ms
+  if (started) {
+    totalElapsed += Date.now() - started;
   }
   return millisecondsToHuman(totalElapsed);
 }
@@ -26,8 +28,121 @@ function pad(numberString, size) {
   return padded;
 }
 
+function newTimer(attrs = {}) {
+  // id: {type: String, required: true},
+
+  const timer = {
+    projectID: 1224465,
+    duration: 0,
+    isLogged: false,
+    note: attrs.title,
+    startedAt: Date.now()
+  };
+
+  return timer;
+}
+
+function findById(array, id, cb) {
+  array.forEach((el) => {
+    if (el._id === id) {
+      cb(el);
+      return;
+    }
+  });
+}
+
+function getTimers(success) {
+  return fetch('http://localhost:8080/api/timers', {
+    headers: {
+      Accept: 'application/json',
+    },
+  }).then(checkStatus)
+    .then(parseJSON)
+    .then(success);
+}
+
+function createTimer(data) {
+  return fetch('http://localhost:8080/api/timers', {
+    method: 'post',
+    body: JSON.stringify(data),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+  }).then(checkStatus);
+}
+
+function updateTimer(data) {
+  return fetch('http://localhost:8080/api/timers', {
+    method: 'put',
+    body: JSON.stringify(data),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+  }).then(checkStatus);
+}
+
+function deleteTimer(data) {
+  return fetch(`http://localhost:8080/api/timers/${data.id}`, {
+    method: 'delete',
+    body: JSON.stringify(data),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+  }).then(checkStatus);
+}
+
+function startTimer(data) {
+  return fetch(`http://localhost:8080/api/timers/start/${data.id}`, {
+    method: 'post',
+    body: JSON.stringify(data),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+  }).then(checkStatus);
+}
+
+function stopTimer(data) {
+  return fetch(`http://localhost:8080/api/timers/stop/${data._id}`, {
+    method: 'post',
+    body: JSON.stringify(data),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+  }).then(checkStatus);
+}
+
+function checkStatus(response) {
+  if (response.status >= 200 && response.status < 300) {
+    return response;
+  } else {
+    const error = new Error(`HTTP Error ${response.statusText}`);
+    error.status = response.statusText;
+    error.response = response;
+    console.log(error);
+    throw error;
+  }
+}
+
+function parseJSON(response) {
+  return response.json();
+}
+
+
 module.exports = {
   renderElapsedString,
   millisecondsToHuman,
-  pad
+  pad,
+  getTimers,
+  createTimer,
+  updateTimer,
+  startTimer,
+  stopTimer,
+  deleteTimer,
+  newTimer,
+  findById
 }

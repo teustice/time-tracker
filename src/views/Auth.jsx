@@ -26,7 +26,7 @@ class Auth extends Component {
 
   componentDidMount() {
     let that = this;
-    let oAuthCode = getUrlVars()['code'];
+    let oAuthCode = getUrlVars()['code']; //Get Oauth access token from params
     if(!oAuthCode) {
       this.setState({error: true});
     } else {

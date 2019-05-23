@@ -35,10 +35,11 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "resolve": "1.10.0",
+    "uuid": "^3.3.2",
     "whatwg-fetch": "3.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "HTTPS=true react-scripts start",
     "build": "react-scripts --max_old_space_size=4096 build",
     "test": "jest",
     "eject": "react-scripts eject"
