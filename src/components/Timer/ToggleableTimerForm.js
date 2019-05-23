@@ -26,6 +26,7 @@ class ToggleableTimerForm extends React.Component {
         <TimerForm
           onFormSubmit={this.handleFormSubmit}
           onFormClose={this.handleFormClose}
+          projects={this.props.projects}
         />
       );
     } else {

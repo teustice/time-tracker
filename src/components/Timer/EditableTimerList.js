@@ -17,6 +17,7 @@ class EditableTimerList extends React.Component {
         onTrashClick={this.props.onTrashClick}
         onStartClick={this.props.onStartClick}
         onStopClick={this.props.onStopClick}
+        projects={this.props.projects}
       />
     ));
     return (
