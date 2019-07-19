@@ -49,7 +49,7 @@ class TimersDashboard extends React.Component {
   loadTimersFromServer = () => {
     client.getTimers((serverTimers) => (
         this.setState({ timers: serverTimers })
-      )
+      ), this.props.currentUser.id
     );
   };
 
@@ -89,6 +89,7 @@ class TimersDashboard extends React.Component {
   };
 
   createTimer = (timer) => {
+    timer.userID = this.props.currentUser.id
 
     this.setState({
       timers: this.state.timers.concat(timer),
