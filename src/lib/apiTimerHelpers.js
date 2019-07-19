@@ -51,11 +51,14 @@ function findById(array, id, cb) {
   });
 }
 
-function getTimers(success) {
-  return fetch('http://localhost:8080/api/timers', {
+function getTimers(success, userID) {
+  return fetch('http://localhost:8080/api/timers/get-timers', {
     headers: {
-      Accept: 'application/json',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
     },
+    method: 'POST',
+    body: JSON.stringify({userID: userID}),
   }).then(checkStatus)
     .then(parseJSON)
     .then(success);
