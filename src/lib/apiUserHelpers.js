@@ -4,7 +4,7 @@ function getToken(code, callback) {
     'client_secret': 'c7801ca2677ed95879306887625ac46485ed84fc5e4ab6e91f69b0479fb0afda',
     'code': code,
     'client_id': '8c72f5154be8eb27e1e4ae05313afdb4990e75c94de95901dc677853b2b16a9b',
-    'redirect_uri': 'https://localhost:3000/auth'
+    'redirect_uri': 'https://fb.cheshirebeane.com/auth'
   }
 
   fetch('https://api.freshbooks.com/auth/oauth/token', {
