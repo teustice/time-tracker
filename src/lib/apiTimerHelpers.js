@@ -79,6 +79,8 @@ function createTimer(data) {
 }
 
 function updateTimer(data) {
+  data.startedAt = Date.now();
+
   return fetch(`http://localhost:8080/api/timers/${data.id}`, {
     method: 'put',
     body: JSON.stringify(data),

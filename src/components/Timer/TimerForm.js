@@ -2,7 +2,7 @@ import React from 'react';
 import SelectSearch from 'react-select-search'
 import TimeField from 'react-simple-timefield';
 
-import {millisecondsToHuman} from '../../lib/apiTimerHelpers';
+import {millisecondsToHuman, renderElapsedString} from '../../lib/apiTimerHelpers';
 
 class TimerForm extends React.Component {
   state = {
@@ -14,7 +14,11 @@ class TimerForm extends React.Component {
 
   componentDidMount() {
     if(this.props.lapsed) {
-      this.setState({duration: millisecondsToHuman(this.props.lapsed)});
+      const elapsedString = renderElapsedString(
+        this.props.lapsed, this.props.runningSince
+      );
+
+      this.setState({duration: elapsedString});
     }
   }
 
@@ -85,6 +89,7 @@ class TimerForm extends React.Component {
 
     let projectText = this.state.project ? this.state.project.name : 'Select a project';
     let serviceText = this.state.service ? this.state.service.name : 'Select a service';
+
 
     return (
       <div className='ui centered card'>
