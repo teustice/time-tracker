@@ -6,10 +6,13 @@ no-undef, jsx-a11y/label-has-for, react/jsx-first-prop-new-line
 import React from 'react';
 import { connect } from 'react-redux';
 
+import authUrl from '../lib/authUrl'
 import EditableTimerList from './Timer/EditableTimerList'
 import ToggleableTimerForm from './Timer/ToggleableTimerForm'
 import PushTimeButton from './PushTimeButton'
 import * as client from '../lib/apiTimerHelpers'
+
+import {setNotification} from '../actions/setNotification';
 
 class TimersDashboard extends React.Component {
   state = {
@@ -31,7 +34,12 @@ class TimersDashboard extends React.Component {
       }
     })
     .then(function(response) {
-      return response.json();
+      if(response.status === 401) {
+        //if not authorized when fetching projects, re-auth
+        window.location.assign(authUrl);
+      } else {
+        return response.json();
+      }
     })
     .then(function(json) {
       that.setState({projects: json.projects})
@@ -47,14 +55,29 @@ class TimersDashboard extends React.Component {
 
   handleCreateFormSubmit = (timer) => {
     this.createTimer(timer);
+    this.props.notifications.addNotification({
+      message: `Timer created successfully`,
+      level: 'success',
+      position: 'tl'
+    })
   };
 
   handleEditFormSubmit = (attrs) => {
     this.updateTimer(attrs);
+    this.props.notifications.addNotification({
+      message: `Timer updated successfully`,
+      level: 'success',
+      position: 'tl'
+    })
   };
 
   handleTrashClick = (timerId) => {
     this.deleteTimer(timerId);
+    this.props.notifications.addNotification({
+      message: `Timer deleted successfully`,
+      level: 'warning',
+      position: 'tl'
+    })
   };
 
   handleStartClick = (timerId) => {
@@ -66,9 +89,11 @@ class TimersDashboard extends React.Component {
   };
 
   createTimer = (timer) => {
+
     this.setState({
       timers: this.state.timers.concat(timer),
     });
+
 
     client.createTimer(timer);
   };

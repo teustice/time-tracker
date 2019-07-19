@@ -5,7 +5,7 @@ class PushTimeButton extends React.Component {
 
   pushEntries() {
     let that = this;
-    this.props.timers.forEach(function(timer) {
+    this.props.timers.forEach(function(timer, index) {
       if(timer.project.length > 2) {
         let project = JSON.parse(timer.project);
         let service = JSON.parse(timer.service)
@@ -20,13 +20,22 @@ class PushTimeButton extends React.Component {
             project_id: project.id,
             service_id: service.id
           }
-        }, timer._id)
+        }, timer._id, project.name)
+      } else {
+        that.props.notifications.addNotification({
+          message: `A timer was not pushed, because it is missing a project`,
+          level: 'warning',
+          position: 'tl'
+        })
       }
     })
   }
 
-  sendEntry(timer, id) {
+  sendEntry(timer, id, pName) {
+    console.log(timer);
     let that = this;
+    document.querySelector('.timerlist').style.opacity = .5;
+    document.querySelector('.timerlist').style.pointerEvents = 'none';
     fetch(`https://api.freshbooks.com/timetracking/business/${this.props.currentUser.business_memberships[0].business.id}/time_entries`, {
       method: 'POST',
       headers: {
@@ -43,6 +52,13 @@ class PushTimeButton extends React.Component {
         return response.json();
       })
       .then(function(json) {
+        that.props.notifications.addNotification({
+          message: `${pName} was pushed successfully`,
+          level: 'success',
+          position: 'tl'
+        })
+        document.querySelector('.timerlist').style.opacity = 1;
+        document.querySelector('.timerlist').style.pointerEvents = 'all';
         console.log(json);
       })
   }

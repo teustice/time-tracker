@@ -5,7 +5,7 @@ class TimerActionButton extends React.Component {
     if (this.props.timerIsRunning) {
       return (
         <div
-          className='ui bottom attached red basic button'
+          className={`ui bottom attached red basic button ${this.props.id ? '' : 'disabled'}`}
           onClick={this.props.onStopClick}
         >
           Stop
@@ -14,7 +14,7 @@ class TimerActionButton extends React.Component {
     } else {
       return (
         <div
-          className='ui bottom attached green basic button'
+          className={`ui bottom attached green basic button ${this.props.id ? '' : 'disabled'}`}
           onClick={this.props.onStartClick}
         >
           Start
