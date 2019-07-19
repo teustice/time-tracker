@@ -34,6 +34,7 @@ class ToggleableTimerForm extends React.Component {
         <div className='ui basic content center aligned segment'>
           <button
             className='ui basic button icon'
+            data-tooltip="Add a Timer" data-position="bottom center"
             onClick={this.handleFormOpen}
           >
             <i className='plus icon' />

@@ -1,45 +1,59 @@
-.home-page {
-  .row div {
-    height: 50px;
-    margin-bottom: 30px;
+// .timerlist {
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: flex-start;
+// }
+
+.card {
+  // margin: 10px !important;
+}
+
+.content  {
+
+  .header {
     p {
-      background-color: red;
+      font-size: 15px;
+      font-weight: 600;
     }
   }
 
-  .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    padding-right: 5%;
-    position: relative;
-    .h4 {
-      margin-bottom: 20px;
-      font-weight: bold;
-      color: $grey;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-    .h3 {
-      font-weight: bold;
-    }
+  .meta {
+
     p {
-      color: $grey;
+      font-size: 15px;
+      line-height: normal;
+
+      &.service {
+        color: $black;
+      }
+
+      &.notes {
+        font-style: italic;
+        font-size: 13px;
+      }
     }
-    span {
-      margin-top: 50px;
-    }
+  }
+
+}
+
+
+.main-header {
+  margin: 10px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+
+.logoutButton {
+
+  &:hover {
+    cursor: pointer;
   }
 }
 
 
-.home-footer {
-  position: absolute;
-  bottom: 30px;
-  left: 0;
-  @media(max-width: 800px) {
-    margin-top: 100px;
-    position: static;
-  }
+.push-time-wrapper {
+  position: fixed;
+  top: 10px;
+  right: 10px;
 }

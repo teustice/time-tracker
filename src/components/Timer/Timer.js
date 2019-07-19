@@ -32,10 +32,13 @@ class Timer extends React.Component {
       <div className='ui centered card'>
         <div className='content'>
           <div className='header'>
-            {this.props.title}
+            <p>{this.props.project.name}</p>
           </div>
           <div className='meta'>
-            {this.props.project}
+            <p className="service">{this.props.service.name}</p>
+            <p className="notes">
+              {this.props.notes}
+            </p>
           </div>
           <div className='center aligned description'>
             <h2>

@@ -1,13 +1,22 @@
 import React from 'react';
 import SelectSearch from 'react-select-search'
+import TimeField from 'react-simple-timefield';
+
+import {millisecondsToHuman} from '../../lib/apiTimerHelpers';
 
 class TimerForm extends React.Component {
   state = {
     notes: this.props.notes || '',
     project: this.props.project || '',
     service: this.props.service || '',
+    duration: '00:00:00'
   };
 
+  componentDidMount() {
+    if(this.props.lapsed) {
+      this.setState({duration: millisecondsToHuman(this.props.lapsed)});
+    }
+  }
 
   handleNotesChange = (e) => {
     this.setState({ notes: e.target.value });
@@ -21,25 +30,41 @@ class TimerForm extends React.Component {
     this.setState({ service: e });
   };
 
+  handleDurationChange = (e) => {
+    this.setState({ duration: e });
+  };
+
   handleSubmit = () => {
     this.props.onFormSubmit({
-      notes: this.state.notes,
-      title: this.state.project.name,
-      id: this.state.project.id,
-      clientId: this.state.project.clientId,
-      service: this.state.service,
+      id: this.props.id,
+      note: this.state.notes,
+      clientID: this.state.project.clientId,
+      project: JSON.stringify(this.state.project),
+      service: JSON.stringify(this.state.service),
+      duration: this.convertHumanToMilliseconds(this.state.duration),
+      isLogged: false,
     });
   };
 
-  render() {
-    console.log(this.props);
+  milliseconds = (h, m, s) => {
+    return (h*60*60+m*60+s)*10
+  };
 
+  convertHumanToMilliseconds(time) {
+    let timeParts = time.split(":");
+
+    return this.milliseconds(timeParts[0], timeParts[1], timeParts[2]);
+
+  }
+
+  render() {
     const submitText = this.props.id ? 'Update' : 'Create';
 
     const options = this.props.projects.map(function(op) {
       return (
         {
           name: op.title,
+          key: op.id,
           value: op.id,
           id: op.id,
           clientId: op.client_id,
@@ -52,25 +77,35 @@ class TimerForm extends React.Component {
       return (
         {
           name: s.name,
+          value: s.id,
           id: s.id
         }
       )
     }) : '';
 
     let projectText = this.state.project ? this.state.project.name : 'Select a project';
-    let serviceText = this.state.project ? this.state.project.name : 'Select a service';
+    let serviceText = this.state.service ? this.state.service.name : 'Select a service';
 
     return (
       <div className='ui centered card'>
         <div className='content'>
           <div className='ui form'>
             <div className='field'>
+              <label>Time</label>
+                <TimeField
+                  value={this.state.duration}
+                  onChange={this.handleDurationChange}
+                  colon=":"
+                  style={{width: '100%'}}
+                  showSeconds={true}
+                />
+            </div>
+            <div className='field'>
               <label>Project</label>
               {options.length > 1 &&
                 <SelectSearch
+                  value={1}
                   options={options}
-                  value={projectText}
-                  renderValue={projectText}
                   onChange={(e) => this.handleProjectChange(e)}
                   name="project"
                   placeholder={projectText} />
@@ -82,8 +117,6 @@ class TimerForm extends React.Component {
                 {services.length > 1 &&
                   <SelectSearch
                     options={services}
-                    value={serviceText}
-                    renderValue={serviceText}
                     onChange={(e) => this.handleServiceChange(e)}
                     name="service"
                     placeholder={serviceText} />

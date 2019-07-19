@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 
 import EditableTimerList from './Timer/EditableTimerList'
 import ToggleableTimerForm from './Timer/ToggleableTimerForm'
+import PushTimeButton from './PushTimeButton'
 import * as client from '../lib/apiTimerHelpers'
 
 class TimersDashboard extends React.Component {
@@ -65,21 +66,22 @@ class TimersDashboard extends React.Component {
   };
 
   createTimer = (timer) => {
-    const t = client.newTimer(timer);
     this.setState({
-      timers: this.state.timers.concat(t),
+      timers: this.state.timers.concat(timer),
     });
 
-    client.createTimer(t);
+    client.createTimer(timer);
   };
 
   updateTimer = (attrs) => {
     this.setState({
       timers: this.state.timers.map((timer) => {
-        if (timer.id === attrs.id) {
+        if (timer._id === attrs.id) {
           return Object.assign({}, timer, {
-            title: attrs.title,
+            note: attrs.note,
+            duration: attrs.duration,
             project: attrs.project,
+            service: attrs.service,
           });
         } else {
           return timer;
@@ -159,8 +161,10 @@ class TimersDashboard extends React.Component {
 
   render() {
     return (
-      <div className='ui three column centered grid'>
-        <div className='column'>
+      <div className='ui'>
+        <PushTimeButton timers={this.state.timers} deleteTimer={this.deleteTimer}/>
+
+        <div>
           <EditableTimerList
             timers={this.state.timers}
             onFormSubmit={this.handleEditFormSubmit}

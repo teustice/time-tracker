@@ -28,19 +28,19 @@ function pad(numberString, size) {
   return padded;
 }
 
-function newTimer(attrs = {}) {
-  // id: {type: String, required: true},
-
-  const timer = {
-    projectID: 1224465,
-    duration: 0,
-    isLogged: false,
-    note: attrs.title,
-    startedAt: Date.now()
-  };
-
-  return timer;
-}
+// function newTimer(attrs = {}) {
+//   // id: {type: String, required: true},
+//
+//   const timer = {
+//     projectID: 1224465,
+//     duration: 0,
+//     isLogged: false,
+//     note: attrs.title,
+//     startedAt: Date.now()
+//   };
+//
+//   return timer;
+// }
 
 function findById(array, id, cb) {
   array.forEach((el) => {
@@ -62,6 +62,9 @@ function getTimers(success) {
 }
 
 function createTimer(data) {
+  data.startedAt = Date.now();
+  data.initialStartTime = Date.now();
+
   return fetch('http://localhost:8080/api/timers', {
     method: 'post',
     body: JSON.stringify(data),
@@ -73,7 +76,7 @@ function createTimer(data) {
 }
 
 function updateTimer(data) {
-  return fetch('http://localhost:8080/api/timers', {
+  return fetch(`http://localhost:8080/api/timers/${data.id}`, {
     method: 'put',
     body: JSON.stringify(data),
     headers: {
@@ -143,6 +146,6 @@ module.exports = {
   startTimer,
   stopTimer,
   deleteTimer,
-  newTimer,
+  // newTimer,
   findById
 }

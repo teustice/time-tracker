@@ -34,8 +34,12 @@ class EditableTimer extends React.Component {
       return (
         <TimerForm
           id={this.props.id}
-          title={this.props.title}
+          projects={this.props.projects}
           project={this.props.project}
+          service={this.props.service}
+          notes={this.props.notes}
+          lapsed={this.props.elapsed}
+          runningSince={this.props.runningSince}
           onFormSubmit={this.handleSubmit}
           onFormClose={this.handleFormClose}
         />
@@ -44,8 +48,9 @@ class EditableTimer extends React.Component {
       return (
         <Timer
           id={this.props.id}
-          title={this.props.title}
           project={this.props.project}
+          service={this.props.service}
+          notes={this.props.notes}
           elapsed={this.props.elapsed}
           runningSince={this.props.runningSince}
           onEditClick={this.handleEditClick}

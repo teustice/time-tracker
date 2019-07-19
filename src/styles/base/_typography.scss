@@ -82,7 +82,7 @@ li {
 
 
 a {
-  color: $grey;
+  color: $brand_1;
   text-decoration: none;
   font-size: 1.6rem;
   font-family: $sans;
@@ -164,7 +164,7 @@ input, label {
         border: none;
         background: none;
         outline: none;
-        font-size: 16px;
+        // font-size: 16px;
         padding: 0 20px;
         color: $black;
         -webkit-appearance: none;
@@ -283,4 +283,8 @@ input, label {
 
 .select-search-box__search::placeholder {
   color: $black !important;
+}
+
+.select-search-box__option {
+  font-size: 1rem;
 }
