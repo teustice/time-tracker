@@ -52,7 +52,7 @@ function findById(array, id, cb) {
 }
 
 function getTimers(success, userID) {
-  return fetch('https://fbapi.cheshirebeane.com/api/get-timers', {
+  return fetch('https://fbapi.cheshirebeane.com/api/timers/get-timers', {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
