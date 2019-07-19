@@ -52,7 +52,7 @@ function findById(array, id, cb) {
 }
 
 function getTimers(success) {
-  return fetch('http://198.199.104.248/api/timers', {
+  return fetch('https://fbapi.cheshirebeane.com/api/timers', {
     headers: {
       Accept: 'application/json',
     },
@@ -65,7 +65,7 @@ function createTimer(data) {
   data.startedAt = Date.now();
   data.initialStartTime = Date.now();
 
-  return fetch('http://198.199.104.248/api/timers', {
+  return fetch('https://fbapi.cheshirebeane.com/api/timers', {
     method: 'post',
     body: JSON.stringify(data),
     headers: {
@@ -76,7 +76,7 @@ function createTimer(data) {
 }
 
 function updateTimer(data) {
-  return fetch(`http://198.199.104.248/api/timers/${data.id}`, {
+  return fetch(`https://fbapi.cheshirebeane.com/api/timers/${data.id}`, {
     method: 'put',
     body: JSON.stringify(data),
     headers: {
@@ -87,7 +87,7 @@ function updateTimer(data) {
 }
 
 function deleteTimer(data) {
-  return fetch(`http://198.199.104.248/api/timers/${data.id}`, {
+  return fetch(`https://fbapi.cheshirebeane.com/api/timers/${data.id}`, {
     method: 'delete',
     body: JSON.stringify(data),
     headers: {
@@ -98,7 +98,7 @@ function deleteTimer(data) {
 }
 
 function startTimer(data) {
-  return fetch(`http://198.199.104.248/api/timers/start/${data.id}`, {
+  return fetch(`https://fbapi.cheshirebeane.com/api/timers/start/${data.id}`, {
     method: 'post',
     body: JSON.stringify(data),
     headers: {
@@ -109,7 +109,7 @@ function startTimer(data) {
 }
 
 function stopTimer(data) {
-  return fetch(`http://198.199.104.248/api/timers/stop/${data._id}`, {
+  return fetch(`https://fbapi.cheshirebeane.com/api/timers/stop/${data._id}`, {
     method: 'post',
     body: JSON.stringify(data),
     headers: {
