@@ -14,7 +14,6 @@ export default function (ComposedComponent) {
     }
 
     render() {
-      console.log(this.props);
       return (
         <div>
           { this.props.currentUser ? <ComposedComponent {...this.props} /> :

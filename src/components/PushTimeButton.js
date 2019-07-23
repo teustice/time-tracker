@@ -32,7 +32,6 @@ class PushTimeButton extends React.Component {
   }
 
   sendEntry(timer, id, pName) {
-    console.log(timer);
     let that = this;
     document.querySelector('.timerlist').style.opacity = .5;
     document.querySelector('.timerlist').style.pointerEvents = 'none';
@@ -48,7 +47,6 @@ class PushTimeButton extends React.Component {
         if(response.status === 200) {
           that.props.deleteTimer(id)
         }
-        console.log(response);
         return response.json();
       })
       .then(function(json) {
@@ -59,7 +57,6 @@ class PushTimeButton extends React.Component {
         })
         document.querySelector('.timerlist').style.opacity = 1;
         document.querySelector('.timerlist').style.pointerEvents = 'all';
-        console.log(json);
       })
   }
 
