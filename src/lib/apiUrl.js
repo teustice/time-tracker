@@ -1,3 +1,3 @@
-const apiUrl = 'http://localhost:8080/api';
+const apiUrl = 'https://fbapi.cheshirebeane.com/api';
 
 export default apiUrl;

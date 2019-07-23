@@ -1,3 +1,3 @@
-const redirectUri = 'https://localhost:3000/auth';
+const redirectUri = 'https://fb.cheshirebeane.com/auth';
 
 export default redirectUri;
