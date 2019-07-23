@@ -1,3 +1,4 @@
+const apiUrl = require('../lib/apiUrl').default;
 
 function renderElapsedString(elapsed, runningSince) {
   let totalElapsed = elapsed;
@@ -52,7 +53,7 @@ function findById(array, id, cb) {
 }
 
 function getTimers(success, userID) {
-  return fetch('http://localhost:8080/api/timers/get-timers', {
+  return fetch(`${apiUrl}/timers/get-timers`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -68,7 +69,7 @@ function createTimer(data) {
   data.startedAt = Date.now();
   data.initialStartTime = Date.now();
 
-  return fetch('http://localhost:8080/api/timers', {
+  return fetch(`${apiUrl}/timers`, {
     method: 'post',
     body: JSON.stringify(data),
     headers: {
@@ -81,7 +82,7 @@ function createTimer(data) {
 function updateTimer(data) {
   data.startedAt = Date.now();
 
-  return fetch(`http://localhost:8080/api/timers/${data.id}`, {
+  return fetch(`${apiUrl}/timers/${data.id}`, {
     method: 'put',
     body: JSON.stringify(data),
     headers: {
@@ -92,7 +93,7 @@ function updateTimer(data) {
 }
 
 function deleteTimer(data) {
-  return fetch(`http://localhost:8080/api/timers/${data.id}`, {
+  return fetch(`${apiUrl}/timers/${data.id}`, {
     method: 'delete',
     body: JSON.stringify(data),
     headers: {
@@ -103,7 +104,7 @@ function deleteTimer(data) {
 }
 
 function startTimer(data) {
-  return fetch(`http://localhost:8080/api/timers/start/${data.id}`, {
+  return fetch(`${apiUrl}/timers/start/${data.id}`, {
     method: 'post',
     body: JSON.stringify(data),
     headers: {
@@ -114,7 +115,7 @@ function startTimer(data) {
 }
 
 function stopTimer(data) {
-  return fetch(`http://localhost:8080/api/timers/stop/${data._id}`, {
+  return fetch(`${apiUrl}/timers/stop/${data._id}`, {
     method: 'post',
     body: JSON.stringify(data),
     headers: {
