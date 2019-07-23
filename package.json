@@ -47,6 +47,7 @@
   "scripts": {
     "start": "HTTPS=true react-scripts start",
     "build": "react-scripts --max_old_space_size=4096 build",
+    "launch": "rsync -avh ./build/ /var/www/timer/",
     "test": "jest",
     "eject": "react-scripts eject"
   },
