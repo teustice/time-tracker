@@ -188,8 +188,10 @@ class TimersDashboard extends React.Component {
   render() {
     return (
       <div className='ui'>
-        <PushTimeButton timers={this.state.timers} deleteTimer={this.deleteTimer}/>
-        <HoursTodayCounter timers={this.state.timers}/>
+        <div className="top-right">
+          <HoursTodayCounter timers={this.state.timers}/>
+          <PushTimeButton timers={this.state.timers} deleteTimer={this.deleteTimer}/>
+        </div>
         <div>
           <EditableTimerList
             timers={this.state.timers}

@@ -14,6 +14,12 @@ class HoursTodayCounter extends React.Component {
     this.getEntries();
   }
 
+  componentDidUpdate(prevProps) {
+    if(this.props.timers !== prevProps.timers){
+      this.getEntries();
+    }
+  }
+
   getEntries(timer, id, pName) {
     let that = this;
     let todayStart = new Date();
@@ -28,7 +34,6 @@ class HoursTodayCounter extends React.Component {
       },
     })
       .then(function(response) {
-        console.log(response);
         return response.json();
       })
       .then(function(json) {
@@ -42,15 +47,21 @@ class HoursTodayCounter extends React.Component {
       totalDuration += entry.duration;
     })
 
-    return totalDuration;
+    //convert seconds to human
+    var date = new Date(null);
+    date.setSeconds(totalDuration); // specify value for SECONDS here
+    var result = date.toISOString().substr(11, 8);
+
+    return result;
   }
 
   render() {
-    console.log(this.state);
 
     return (
       <div className="total-hours-wrapper">
-        {this.state.entries && this.hoursPushed()}
+        {this.state.entries &&
+          <p className="time-pushed">Daily Total: <strong>{this.hoursPushed()}</strong></p>
+        }
       </div>
     );
   }

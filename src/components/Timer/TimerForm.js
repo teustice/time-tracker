@@ -13,7 +13,7 @@ class TimerForm extends React.Component {
   };
 
   componentDidMount() {
-    if(this.props.lapsed) {
+    if(this.props.runningSince) {
       const elapsedString = renderElapsedString(
         this.props.lapsed, this.props.runningSince
       );

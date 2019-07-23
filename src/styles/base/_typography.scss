@@ -1,22 +1,29 @@
 @font-face {
-    font-family: 'Raleway';
-    src: url('../assets/fonts/raleway-light-webfont.woff') format('woff');
+    font-family: 'Gotham';
+    src: url('../assets/fonts/GothamLight.woff2') format('woff2'),
+        url('../assets/fonts/GothamLight.woff') format('woff');
     font-weight: 300;
-}
-@font-face {
-    font-family: 'Raleway';
-    src: url('../assets/fonts/raleway-medium-webfont.woff') format('woff');
-    font-weight: 500;
-}
-@font-face {
-    font-family: 'Raleway';
-    src: url('../assets/fonts/raleway-semibold-webfont.woff') format('woff');
-    font-weight: 700;
+    font-style: normal;
 }
 
+@font-face {
+    font-family: 'Gotham';
+    src: url('../assets/fonts/Gotham-Medium.woff2') format('woff2'),
+        url('../assets/fonts/Gotham-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gotham';
+    src: url('../assets/fonts/Gotham-Bold.woff2') format('woff2'),
+        url('../assets/fonts/Gotham-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
  //FONTS
-$sans: 'Raleway', sans-serif;
-$title: 'Raleway', sans-serif;
+$sans: 'Gotham', sans-serif;
+$title: 'Gotham', sans-serif;
 
 
 h1, h2, h3, h1 a, h2 a, h3 a {
@@ -95,7 +102,7 @@ a {
 //GENERAL MEDIA Q
 
 .bold {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .uppercase {
@@ -287,4 +294,9 @@ input, label {
 
 .select-search-box__option {
   font-size: 1rem;
+}
+
+
+strong {
+  font-weight: 500;
 }

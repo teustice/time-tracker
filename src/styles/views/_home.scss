@@ -52,10 +52,21 @@
 }
 
 
-.push-time-wrapper {
+.top-right {
   position: fixed;
   top: 10px;
   right: 10px;
+  display: flex;
+  align-items: center;
+
+  .total-hours-wrapper {
+    margin-right: 30px;
+    
+    p {
+      font-size: 1.3rem;
+      line-height: normal;
+    }
+  }
 }
 
 
