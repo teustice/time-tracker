@@ -45,7 +45,7 @@ class Timer extends React.Component {
               {elapsedString}
             </h2>
           </div>
-          <div className='extra content' className={this.props.id ? '' : 'disabled'}>
+          <div className={`extra content ${this.props.id ? '' : ' disabled'} `}>
             <span
               className='right floated edit icon'
               onClick={this.props.onEditClick}

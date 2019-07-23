@@ -12,8 +12,6 @@ import ToggleableTimerForm from './Timer/ToggleableTimerForm'
 import PushTimeButton from './PushTimeButton'
 import * as client from '../lib/apiTimerHelpers'
 
-import {setNotification} from '../actions/setNotification';
-
 class TimersDashboard extends React.Component {
   state = {
     timers: [],

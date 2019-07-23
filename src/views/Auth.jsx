@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { setCurrentUser } from '../actions/setCurrentUser'
 
 import {
-  getToken, getUser
+  getToken
 } from '../lib/apiUserHelpers'
 
 function getUrlVars() {
   var vars = {};
-  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+  window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
     vars[key] = value;
   });
   return vars;

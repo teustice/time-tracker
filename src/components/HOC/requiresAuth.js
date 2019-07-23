@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { setCurrentUser } from '../../actions/setCurrentUser'
 
 import AuthButton from '../AuthButton'
+import clockSvg from '../../assets/images/clock.svg';
 
 export default function (ComposedComponent) {
   class Authenticate extends React.Component {
@@ -17,7 +18,10 @@ export default function (ComposedComponent) {
       return (
         <div>
           { this.props.currentUser ? <ComposedComponent {...this.props} /> :
-          <div className="container" style={{paddingTop: 100}}>
+          <div className="container auth-landing-page">
+            <img src={clockSvg} alt="Clock" style={{width: 80, height: 'auto'}}/>
+            <h3 className="bold">Time Tracker</h3>
+            <p>A custom solution for tracking time with FreshBooks</p>
             <AuthButton text="Connect your account to begin"/>
           </div>
         }

@@ -34,6 +34,7 @@ body {
   position: relative;
   overflow-x: hidden;
   min-height: 90vh;
+  background-image: url('../assets/images/texture.png');
 }
 
 figure {
@@ -48,15 +49,15 @@ picture {
 
 $container-padding: 120px;
 .container {
-  width: calc(100vw - 10%);
-  // max-width: 1500px;
+  // width: calc(100vw - 10%);
+  max-width: 1500px;
   padding: 0px $container-padding;
   margin: auto;
   @media(max-width: 1024px){
-    padding: 50px;
+    padding: 20px;
   }
   @media(max-width: 800px){
-    padding: 30px;
+    padding: 15px;
   }
 }
 

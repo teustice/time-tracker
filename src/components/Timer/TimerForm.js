@@ -2,7 +2,7 @@ import React from 'react';
 import SelectSearch from 'react-select-search'
 import TimeField from 'react-simple-timefield';
 
-import {millisecondsToHuman, renderElapsedString} from '../../lib/apiTimerHelpers';
+import {renderElapsedString} from '../../lib/apiTimerHelpers';
 
 class TimerForm extends React.Component {
   state = {
