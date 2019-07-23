@@ -10,6 +10,7 @@ import authUrl from '../lib/authUrl'
 import EditableTimerList from './Timer/EditableTimerList'
 import ToggleableTimerForm from './Timer/ToggleableTimerForm'
 import PushTimeButton from './PushTimeButton'
+import HoursTodayCounter from './HoursTodayCounter'
 import * as client from '../lib/apiTimerHelpers'
 
 class TimersDashboard extends React.Component {
@@ -188,7 +189,7 @@ class TimersDashboard extends React.Component {
     return (
       <div className='ui'>
         <PushTimeButton timers={this.state.timers} deleteTimer={this.deleteTimer}/>
-
+        <HoursTodayCounter timers={this.state.timers}/>
         <div>
           <EditableTimerList
             timers={this.state.timers}
