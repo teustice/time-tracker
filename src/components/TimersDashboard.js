@@ -189,7 +189,6 @@ class TimersDashboard extends React.Component {
     return (
       <div className='ui'>
         <div className="top-right">
-          <HoursTodayCounter timers={this.state.timers}/>
           <PushTimeButton timers={this.state.timers} deleteTimer={this.deleteTimer}/>
         </div>
         <div>
@@ -201,6 +200,7 @@ class TimersDashboard extends React.Component {
             onStopClick={this.handleStopClick}
             projects={this.state.projects}
           />
+          <HoursTodayCounter timers={this.state.timers}/>
           <ToggleableTimerForm
             onFormSubmit={this.handleCreateFormSubmit}
             projects={this.state.projects}
