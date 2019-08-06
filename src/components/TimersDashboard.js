@@ -27,7 +27,7 @@ class TimersDashboard extends React.Component {
 
   fetchProjects(page) {
     let that = this;
-    fetch(`https://api.freshbooks.com/projects/business/${this.props.currentUser.business_memberships[0].business.id}/projects?per_page=500`, {
+    fetch(`https://api.freshbooks.com/projects/business/${this.props.currentUser.business_memberships[0].business.id}/projects?per_page=500&complete=false`, {
       headers: {
         'Authorization': `Bearer ${this.props.currentUser.token.access_token}`
       }
@@ -102,8 +102,11 @@ class TimersDashboard extends React.Component {
     this.setState({
       timers: this.state.timers.map((timer) => {
         if (timer._id === attrs.id) {
+          if(attrs.startedAt) {
+            attrs.startedAt = Date.now();
+          }
           return Object.assign({}, timer, {
-            startedAt: Date.now(),
+            startedAt: attrs.startedAt,
             note: attrs.note,
             duration: attrs.duration,
             project: attrs.project,

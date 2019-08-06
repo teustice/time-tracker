@@ -80,8 +80,6 @@ function createTimer(data) {
 }
 
 function updateTimer(data) {
-  data.startedAt = Date.now();
-
   return fetch(`${apiUrl}/timers/${data.id}`, {
     method: 'put',
     body: JSON.stringify(data),

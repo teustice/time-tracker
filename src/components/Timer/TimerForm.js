@@ -13,12 +13,25 @@ class TimerForm extends React.Component {
   };
 
   componentDidMount() {
-    if(this.props.runningSince) {
+    if(this.props.lapsed) {
       const elapsedString = renderElapsedString(
         this.props.lapsed, this.props.runningSince
       );
 
-      this.setState({duration: elapsedString});
+      this.setState({duration: elapsedString});      
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    //Prevent re-render due to server interval - this fixed an issue causing the dropdown filter to reset
+    if (
+      this.state.notes !== nextState.notes ||
+      nextState.project !== this.state.project ||
+      nextState.duration !== this.state.duration
+    ) {
+      return true
+    } else {
+      return false
     }
   }
 
@@ -42,6 +55,7 @@ class TimerForm extends React.Component {
     this.props.onFormSubmit({
       id: this.props.id,
       note: this.state.notes,
+      startedAt: this.props.runningSince,
       clientID: this.state.project.clientId,
       project: JSON.stringify(this.state.project),
       service: JSON.stringify(this.state.service),

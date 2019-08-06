@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import authUrl from '../lib/authUrl'
 
 class PushTimeButton extends React.Component {
 
@@ -41,20 +42,30 @@ class PushTimeButton extends React.Component {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.props.currentUser.token.access_token}`
       },
+
       body: JSON.stringify(timer)
     })
       .then(function(response) {
         if(response.status === 200) {
           that.props.deleteTimer(id)
+          that.props.notifications.addNotification({
+            message: `${pName} was pushed successfully`,
+            level: 'success',
+            position: 'tl'
+          })
+        } else if(response.status === 401){
+          that.props.notifications.addNotification({
+            message: `Your session has expired. We are redirecting you for authentication.`,
+            level: 'warning',
+            position: 'tl'
+          })
+          setTimeout(function () {
+            window.location.replace(authUrl)
+          }, 2000);
         }
         return response.json();
       })
       .then(function(json) {
-        that.props.notifications.addNotification({
-          message: `${pName} was pushed successfully`,
-          level: 'success',
-          position: 'tl'
-        })
         document.querySelector('.timerlist').style.opacity = 1;
         document.querySelector('.timerlist').style.pointerEvents = 'all';
       })
