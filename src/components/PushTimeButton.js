@@ -1,8 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import authUrl from '../lib/authUrl'
+import MoneyFlyBy from './MoneyFlyBy'
 
 class PushTimeButton extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      pushingTimers: false
+    }
+  }
 
   pushEntries() {
     let that = this;
@@ -68,14 +76,22 @@ class PushTimeButton extends React.Component {
       .then(function(json) {
         document.querySelector('.timerlist').style.opacity = 1;
         document.querySelector('.timerlist').style.pointerEvents = 'all';
+
+        that.setState({pushingTimers: true});
+        setTimeout(function () {
+          that.setState({pushingTimers: false});
+        }, 3000);
       })
   }
 
   render() {
     return (
-      <div className="push-time-wrapper">
-        <button onClick={this.pushEntries.bind(this)} className="ui basic button icon" data-tooltip="Push timers to freshbooks" data-position="bottom right"><i className="angle double up icon"></i></button>
-      </div>
+      <React.Fragment>
+        <MoneyFlyBy animating={this.state.pushingTimers}/>
+        <div className="push-time-wrapper">
+          <button onClick={this.pushEntries.bind(this)} className="ui basic button icon" data-tooltip="Push timers to freshbooks" data-position="bottom right"><i className="angle double up icon"></i></button>
+        </div>
+      </React.Fragment>
     );
   }
 

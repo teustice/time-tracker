@@ -211,3 +211,41 @@ td {
     stroke-dashoffset: 1000;
   }
 }
+
+
+.money-fly-by {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-size: 200px;
+  transition: all 6000ms;
+  transform: translate(-100%, 100%);
+  background-image: url('../assets/images/money.gif');
+  z-index: -2;
+  opacity: 0;
+
+  &.animating {
+    opacity: 1;
+    transform: translate(100%, -100%);
+  }
+}
+
+.snoop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 800ms;
+
+  &.animating {
+    opacity: 1;
+  }
+}
