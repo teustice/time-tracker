@@ -5,6 +5,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "css-loader": "2.1.1",
+    "d3": "^5.9.7",
     "dotenv": "7.0.0",
     "dotenv-expand": "5.1.0",
     "fs-extra": "7.0.1",

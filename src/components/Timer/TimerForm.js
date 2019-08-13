@@ -65,7 +65,7 @@ class TimerForm extends React.Component {
   };
 
   milliseconds = (h, m, s) => {
-    return (h*60*60+m*60+s)*10
+    return (h*60*60+m*60+parseInt(s))*1000
   };
 
   convertHumanToMilliseconds(time) {

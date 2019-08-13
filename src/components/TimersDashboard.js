@@ -203,7 +203,7 @@ class TimersDashboard extends React.Component {
             onStopClick={this.handleStopClick}
             projects={this.state.projects}
           />
-          <HoursTodayCounter timers={this.state.timers}/>
+          <HoursTodayCounter timers={this.state.timers} projects={this.state.projects}/>
           <ToggleableTimerForm
             onFormSubmit={this.handleCreateFormSubmit}
             projects={this.state.projects}
