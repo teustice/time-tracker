@@ -2,20 +2,18 @@ import { combineReducers } from 'redux';
 
 import currentUser from './currentUser';
 import {
-  todos,
-  deleteTodo,
-  deleteTodoBatch,
-  createTodo,
-  createTodoBatch
-} from './todos';
+  timers,
+  createTimer,
+  updateTimer,
+  deleteTimer
+} from './timers';
 import notifications from './notifications';
 
 export default combineReducers({
   currentUser,
-  todos,
-  deleteTodo,
-  deleteTodoBatch,
-  createTodo,
-  createTodoBatch,
+  timers,
+  deleteTimer,
+  updateTimer,
+  createTimer,
   notifications
 })

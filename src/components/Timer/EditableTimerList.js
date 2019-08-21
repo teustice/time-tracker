@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import EditableTimer from './EditableTimer';
 
 class EditableTimerList extends React.Component {
   render() {
+    console.log(this.props);
     const timers = this.props.timers.map((timer) => (
       <EditableTimer
         key={'timer' + timer._id + timer.startedAt}
@@ -28,4 +30,12 @@ class EditableTimerList extends React.Component {
   }
 }
 
-export default EditableTimerList;
+const mapStateToProps = state => ({
+  ...state
+})
+
+
+const mapDispatchToProps = dispatch => ({
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditableTimerList);

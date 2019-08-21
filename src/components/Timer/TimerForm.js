@@ -1,8 +1,10 @@
 import React from 'react';
 import SelectSearch from 'react-select-search'
 import TimeField from 'react-simple-timefield';
+import { connect } from 'react-redux';
 
 import {renderElapsedString} from '../../lib/apiTimerHelpers';
+import { createTimer } from '../../actions/timerActions';
 
 class TimerForm extends React.Component {
   state = {
@@ -52,7 +54,7 @@ class TimerForm extends React.Component {
   };
 
   handleSubmit = () => {
-    this.props.onFormSubmit({
+    this.props.createTimer({
       id: this.props.id,
       note: this.state.notes,
       startedAt: this.props.runningSince,
@@ -61,7 +63,18 @@ class TimerForm extends React.Component {
       service: JSON.stringify(this.state.service),
       duration: this.convertHumanToMilliseconds(this.state.duration),
       isLogged: false,
-    });
+      userID: this.props.currentUser.id
+    })
+    // this.props.onFormSubmit({
+    //   id: this.props.id,
+    //   note: this.state.notes,
+    //   startedAt: this.props.runningSince,
+    //   clientID: this.state.project.clientId,
+    //   project: JSON.stringify(this.state.project),
+    //   service: JSON.stringify(this.state.service),
+    //   duration: this.convertHumanToMilliseconds(this.state.duration),
+    //   isLogged: false,
+    // });
   };
 
   milliseconds = (h, m, s) => {
@@ -172,6 +185,13 @@ class TimerForm extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  ...state
+})
 
 
-export default TimerForm;
+const mapDispatchToProps = dispatch => ({
+  createTimer: (timer) => dispatch(createTimer(timer))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(TimerForm);

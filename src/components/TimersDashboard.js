@@ -11,6 +11,7 @@ import EditableTimerList from './Timer/EditableTimerList'
 import ToggleableTimerForm from './Timer/ToggleableTimerForm'
 import PushTimeButton from './PushTimeButton'
 import HoursTodayCounter from './HoursTodayCounter'
+import { getTimers } from '../actions/timerActions';
 import * as client from '../lib/apiTimerHelpers'
 
 class TimersDashboard extends React.Component {
@@ -46,20 +47,17 @@ class TimersDashboard extends React.Component {
   }
 
   loadTimersFromServer = () => {
-    client.getTimers((serverTimers) => (
-        this.setState({ timers: serverTimers })
-      ), this.props.currentUser.id
-    );
+    this.props.getTimers(this.props.currentUser.id);
   };
 
-  handleCreateFormSubmit = (timer) => {
-    this.createTimer(timer);
-    this.props.notifications.addNotification({
-      message: `Timer created successfully`,
-      level: 'success',
-      position: 'tl'
-    })
-  };
+  // handleCreateFormSubmit = (timer) => {
+  //   this.createTimer(timer);
+  //   this.props.notifications.addNotification({
+  //     message: `Timer created successfully`,
+  //     level: 'success',
+  //     position: 'tl'
+  //   })
+  // };
 
   handleEditFormSubmit = (attrs) => {
     this.updateTimer(attrs);
@@ -87,16 +85,16 @@ class TimersDashboard extends React.Component {
     this.stopTimer(timerId);
   };
 
-  createTimer = (timer) => {
-    timer.userID = this.props.currentUser.id
-
-    this.setState({
-      timers: this.state.timers.concat(timer),
-    });
-
-
-    client.createTimer(timer);
-  };
+  // createTimer = (timer) => {
+  //   timer.userID = this.props.currentUser.id
+  //
+  //   this.setState({
+  //     timers: this.state.timers.concat(timer),
+  //   });
+  //
+  //
+  //   client.createTimer(timer);
+  // };
 
   updateTimer = (attrs) => {
     this.setState({
@@ -192,18 +190,19 @@ class TimersDashboard extends React.Component {
     return (
       <div className='ui'>
         <div className="top-right">
-          <PushTimeButton timers={this.state.timers} deleteTimer={this.deleteTimer}/>
+          <PushTimeButton deleteTimer={this.deleteTimer}/>
         </div>
         <div>
-          <EditableTimerList
-            timers={this.state.timers}
-            onFormSubmit={this.handleEditFormSubmit}
-            onTrashClick={this.handleTrashClick}
-            onStartClick={this.handleStartClick}
-            onStopClick={this.handleStopClick}
-            projects={this.state.projects}
-          />
-          <HoursTodayCounter timers={this.state.timers} projects={this.state.projects}/>
+          {!this.props.timers.isFetching &&
+            <EditableTimerList
+              onFormSubmit={this.handleEditFormSubmit}
+              onTrashClick={this.handleTrashClick}
+              onStartClick={this.handleStartClick}
+              onStopClick={this.handleStopClick}
+              projects={this.state.projects}
+              />
+          }
+          <HoursTodayCounter projects={this.state.projects}/>
           <ToggleableTimerForm
             onFormSubmit={this.handleCreateFormSubmit}
             projects={this.state.projects}
@@ -220,7 +219,7 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = dispatch => ({
-
+  getTimers: (userID) => dispatch(getTimers(userID))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimersDashboard);
