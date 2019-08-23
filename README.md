@@ -2,8 +2,9 @@
 
 ### A custom time tracking application for use with FreshBooks.
 
-![Example 1](https://github.com/teustice/time-tracker/blob/master/src/assets/images/example1.jpg?raw=true "Example 1")
-![Example 2](https://github.com/teustice/time-tracker/blob/master/src/assets/images/example2.jpg?raw=true "Example 2")
+Dashboard           |  Editing timer
+:-------------------------:|:-------------------------:
+![Example 1](https://github.com/teustice/time-tracker/blob/master/src/assets/images/example1.jpg?raw=true "Example 1") | ![Example 2](https://github.com/teustice/time-tracker/blob/master/src/assets/images/example2.jpg?raw=true "Example 2")
 
 Built with React, Express.js, and the FreshBooks API.
 
