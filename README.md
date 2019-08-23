@@ -10,6 +10,8 @@ Built with React, Express.js, and the FreshBooks API.
 
 This application is designed to be a custom time tracking alternative to the native one in FreshBooks. The primary incentive for making this was the inability to have multiple timers in the native FreshBooks time tracker.
 
+The Node/Express backend can be [found here.](https://github.com/teustice/time-tracker-backend)
+
 If you're a current FreshBooks user, feel free to [try it out here.](https://fb.cheshirebeane.com/)
 
 
