@@ -11,10 +11,12 @@ class EditableTimerList extends React.Component {
         project={JSON.parse(timer.project)}
         service={JSON.parse(timer.service)}
         notes={timer.note}
+        favorite={timer.favorite}
         elapsed={timer.duration}
         runningSince={timer.startedAt}
         onFormSubmit={this.props.onFormSubmit}
         onTrashClick={this.props.onTrashClick}
+        onFavoriteClick={this.props.onFavoriteClick}
         onStartClick={this.props.onStartClick}
         onStopClick={this.props.onStopClick}
         projects={this.props.projects}

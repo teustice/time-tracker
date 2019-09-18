@@ -27,9 +27,10 @@ class PushTimeButton extends React.Component {
             started_at: timer.initialStartTime,
             client_id: project.clientId,
             project_id: project.id,
-            service_id: service.id
+            service_id: service.id,
+            favorite: timer.favorite
           }
-        }, timer._id, project.name)
+        }, timer._id, project.name, JSON.stringify(project), JSON.stringify(service))
       } else {
         that.props.notifications.addNotification({
           message: `A timer was not pushed, because it is missing a project`,
@@ -40,7 +41,7 @@ class PushTimeButton extends React.Component {
     })
   }
 
-  sendEntry(timer, id, pName) {
+  sendEntry(timer, id, pName, project, service) {
     let that = this;
     document.querySelector('.timerlist').style.opacity = .5;
     document.querySelector('.timerlist').style.pointerEvents = 'none';
@@ -55,12 +56,24 @@ class PushTimeButton extends React.Component {
     })
       .then(function(response) {
         if(response.status === 200) {
-          that.props.deleteTimer(id)
           that.props.notifications.addNotification({
             message: `${pName} was pushed successfully`,
             level: 'success',
             position: 'tl'
           })
+
+          if(!timer.time_entry.favorite) {
+            that.props.deleteTimer(id)
+          } else {
+            that.props.updateTimer({
+              id: id,
+              note: '',
+              duration: 0,
+              startedAt: null,
+              project: project,
+              service: service
+            })
+          }
         } else if(response.status === 401){
           that.props.notifications.addNotification({
             message: `Your session has expired. We are redirecting you for authentication.`,

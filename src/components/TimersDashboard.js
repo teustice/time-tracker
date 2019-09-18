@@ -79,6 +79,10 @@ class TimersDashboard extends React.Component {
     })
   };
 
+  handleFavoriteClick = (timerId) => {
+    this.favoriteTimer(timerId);
+  };
+
   handleStartClick = (timerId) => {
     this.startTimer(timerId);
   };
@@ -119,6 +123,23 @@ class TimersDashboard extends React.Component {
     });
 
     client.updateTimer(attrs);
+  };
+
+  favoriteTimer = (timerId) => {
+    this.setState({
+      timers: this.state.timers.map((timer) => {
+        if (timer._id === timerId) {
+          client.updateTimer({id: timerId, favorite: !timer.favorite});
+          return Object.assign({}, timer, {
+            favorite: !timer.favorite
+          });
+        } else {
+          return timer;
+        }
+
+      }),
+    });
+
   };
 
   deleteTimer = (timerId) => {
@@ -192,12 +213,13 @@ class TimersDashboard extends React.Component {
     return (
       <div className='ui'>
         <div className="top-right">
-          <PushTimeButton timers={this.state.timers} deleteTimer={this.deleteTimer}/>
+          <PushTimeButton timers={this.state.timers} deleteTimer={this.deleteTimer} updateTimer={this.updateTimer}/>
         </div>
         <div>
           <EditableTimerList
             timers={this.state.timers}
             onFormSubmit={this.handleEditFormSubmit}
+            onFavoriteClick={this.handleFavoriteClick}
             onTrashClick={this.handleTrashClick}
             onStartClick={this.handleStartClick}
             onStopClick={this.handleStopClick}

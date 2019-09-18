@@ -47,6 +47,12 @@ class Timer extends React.Component {
           </div>
           <div className={`extra content ${this.props.id ? '' : ' disabled'} `}>
             <span
+              className={`right floated star icon ${this.props.favorite ? 'active' : ''}`}
+              onClick={() => this.props.onFavoriteClick(this.props.id)}
+            >
+              <i className='star icon' />
+            </span>
+            <span
               className='right floated edit icon'
               onClick={this.props.onEditClick}
             >
