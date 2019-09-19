@@ -27,6 +27,7 @@ function SimpleModal(props, ref) {
   }));
 
   function openModal() {
+    console.log('here');
     setModalIsOpen(true);
   }
 
@@ -42,8 +43,11 @@ function SimpleModal(props, ref) {
            style={customStyles}
            contentLabel="Example Modal"
          >
+         <button className="ui basic button icon" onClick={closeModal}>
+           <i className="close icon"></i>
+         </button>
           {props.children}
-          <button onClick={closeModal}>close</button>
+
 
          </Modal>
        </div>

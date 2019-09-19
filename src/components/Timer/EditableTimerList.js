@@ -1,8 +1,26 @@
 import React from 'react';
+import { Resizable, ResizableBox } from 'react-resizable';
 
 import EditableTimer from './EditableTimer';
 
 class EditableTimerList extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.draggableArea = React.createRef()
+
+    this.state = {
+      listWidth: localStorage.getItem('timerListWidth') && !isNaN(localStorage.getItem('timerListWidth')) ? parseInt(localStorage.getItem('timerListWidth')) : 320
+    }
+  }
+
+
+  saveWidth(e, data) {
+    if(data.size.width) {
+      localStorage.setItem('timerListWidth', data.size.width);
+    }
+  }
+
   render() {
     const timers = this.props.timers.map((timer) => (
       <EditableTimer
@@ -23,9 +41,15 @@ class EditableTimerList extends React.Component {
       />
     ));
     return (
-      <div id='timers' className="timerlist">
-        {timers}
-      </div>
+      <ResizableBox
+        width={this.state.listWidth}
+        axis={'x'}
+        minConstraints={[320, 320]}
+        onResizeStop={(e, data) => this.saveWidth(e, data)}>
+        <div ref={this.draggableArea} id='timers' className="timerlist grid-mode">
+          {timers}
+        </div>
+      </ResizableBox>
     );
   }
 }
