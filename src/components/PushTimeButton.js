@@ -19,12 +19,14 @@ class PushTimeButton extends React.Component {
         let project = JSON.parse(timer.project);
         let service = JSON.parse(timer.service)
         let duration = (timer.duration * .001).toFixed(0) //convert ms to s
+        let today = new Date(Date.now())
+        let startTime = (timer.favorite ? today.toISOString() : timer.initialStartTime); //return todays date as start time if pushing a favorited timer
         that.sendEntry({
           time_entry: {
             is_logged: true,
             duration: duration,
             note: timer.note,
-            started_at: timer.initialStartTime,
+            started_at: startTime,
             client_id: project.clientId,
             project_id: project.id,
             service_id: service.id,
