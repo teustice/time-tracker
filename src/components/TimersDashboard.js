@@ -14,6 +14,17 @@ import OptionsButton from './OptionsButton'
 import HoursTodayCounter from './HoursTodayCounter'
 import * as client from '../lib/apiTimerHelpers'
 
+
+function sortTimersByPriority(a, b) {
+  if (a.priority > b.priority) {
+    return -1;
+  } else if (b.priority > a.priority) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
 class TimersDashboard extends React.Component {
   state = {
     timers: [],
@@ -84,6 +95,10 @@ class TimersDashboard extends React.Component {
     this.favoriteTimer(timerId);
   };
 
+  handlePriorityClick = (timerId, direction) => {
+    this.updatePriority(timerId, direction);
+  };
+
   handleStartClick = (timerId) => {
     this.startTimer(timerId);
   };
@@ -124,6 +139,29 @@ class TimersDashboard extends React.Component {
     });
 
     client.updateTimer(attrs);
+  };
+
+  updatePriority = (timerId, direction) => {
+    this.setState({
+      timers: this.state.timers.map((timer) => {
+        if (timer._id === timerId) {
+          let priority = timer.priority;
+          if(direction === 'increase') {
+            priority += 1;
+          } else {
+            priority -= 1;
+          }
+          client.updateTimer({id: timerId, priority: priority});
+          return Object.assign({}, timer, {
+            priority: priority
+          });
+        } else {
+          return timer;
+        }
+
+      }),
+    });
+
   };
 
   favoriteTimer = (timerId) => {
@@ -211,23 +249,26 @@ class TimersDashboard extends React.Component {
 
 
   render() {
+    let sortedTimers = this.state.timers.slice();
+    sortedTimers.sort(sortTimersByPriority);
     return (
       <div className='ui'>
         <div className="top-right">
           <OptionsButton />
-          <PushTimeButton timers={this.state.timers} deleteTimer={this.deleteTimer} updateTimer={this.updateTimer}/>
+          <PushTimeButton timers={sortedTimers} deleteTimer={this.deleteTimer} updateTimer={this.updateTimer}/>
         </div>
         <div>
           <EditableTimerList
-            timers={this.state.timers}
+            timers={sortedTimers}
             onFormSubmit={this.handleEditFormSubmit}
             onFavoriteClick={this.handleFavoriteClick}
+            onPriorityClick={this.handlePriorityClick}
             onTrashClick={this.handleTrashClick}
             onStartClick={this.handleStartClick}
             onStopClick={this.handleStopClick}
             projects={this.state.projects}
           />
-          <HoursTodayCounter timers={this.state.timers} projects={this.state.projects}/>
+        <HoursTodayCounter timers={sortedTimers} projects={this.state.projects}/>
           <ToggleableTimerForm
             onFormSubmit={this.handleCreateFormSubmit}
             projects={this.state.projects}

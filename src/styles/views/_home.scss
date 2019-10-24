@@ -167,3 +167,22 @@
   bottom: 0;
   transform: rotate(45deg);
 }
+
+
+.priority-buttons{
+  position: absolute;
+  top: 10px;
+  left: -25px;
+
+  span {
+    display: block;
+  }
+}
+
+
+.icon {
+
+  &:hover {
+    cursor: pointer;
+  }
+}

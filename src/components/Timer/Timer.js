@@ -30,6 +30,24 @@ class Timer extends React.Component {
     );
     return (
       <div className='ui centered card'>
+        <div className="priority-buttons">
+          <span
+            className={`${this.props.favorite ? 'active' : ''}`}
+            onClick={() => this.props.onPriorityClick(this.props.id, 'increase')}
+            data-tooltip={`Timer Priority: ${this.props.priority}`}
+            data-position="bottom right"
+            >
+            <i className="arrow alternate circle up icon"></i>
+          </span>
+          <span
+            className={`${this.props.favorite ? 'active' : ''}`}
+            onClick={() => this.props.onPriorityClick(this.props.id, 'decrease')}
+            data-tooltip={`Timer Priority: ${this.props.priority}`}
+            data-position="bottom right"
+            >
+            <i className="arrow alternate circle down icon"></i>
+          </span>
+        </div>
         <div className='content'>
           <div className='header'>
             <p>{this.props.project.name}</p>

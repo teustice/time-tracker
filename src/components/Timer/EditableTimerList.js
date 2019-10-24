@@ -22,6 +22,7 @@ class EditableTimerList extends React.Component {
   }
 
   render() {
+
     const timers = this.props.timers.map((timer) => (
       <EditableTimer
         key={'timer' + timer._id + timer.startedAt}
@@ -30,11 +31,13 @@ class EditableTimerList extends React.Component {
         service={JSON.parse(timer.service)}
         notes={timer.note}
         favorite={timer.favorite}
+        priority={timer.priority}
         elapsed={timer.duration}
         runningSince={timer.startedAt}
         onFormSubmit={this.props.onFormSubmit}
         onTrashClick={this.props.onTrashClick}
         onFavoriteClick={this.props.onFavoriteClick}
+        onPriorityClick={this.props.onPriorityClick}
         onStartClick={this.props.onStartClick}
         onStopClick={this.props.onStopClick}
         projects={this.props.projects}
