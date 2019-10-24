@@ -30,7 +30,7 @@ class Timer extends React.Component {
     );
     return (
       <div className='ui centered card'>
-        <div className="priority-buttons">
+        <div className="priority-buttons show-on-hover">
           <span
             className={`${this.props.favorite ? 'active' : ''}`}
             onClick={() => this.props.onPriorityClick(this.props.id, 'increase')}

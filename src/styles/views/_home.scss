@@ -10,6 +10,12 @@
     justify-content: center;
     .card {
       margin: 15px !important;
+
+      &:hover {
+        .show-on-hover {
+          opacity: 1;
+        }
+      }
     }
   }
 }
@@ -166,6 +172,11 @@
 .react-resizable-handle-s {
   bottom: 0;
   transform: rotate(45deg);
+}
+
+.show-on-hover {
+  opacity: 0;
+  transition: 200ms;
 }
 
 
